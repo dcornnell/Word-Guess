@@ -2,8 +2,8 @@ let gameData = {
     alphabet: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
         "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
     ],
-    words: ["ox", "doog", "bear"],
-    pick: [],
+    words: ["ox", "llama", "bear"],
+    picked: [],
     wins: 0,
     numberOfGuesses: 0
 }
@@ -13,11 +13,17 @@ console.log(randomWord);
 let blankWord = [];
 let lettersLeft = randomWord.length;
 
+
+
 for (i = 0; i < randomWord.length; i++) {
     blankWord[i] = "_";
 
 }
 
+//let guessesLeft = $("#guesses-left");
+let gameBoard = $("#game-board");
+let pickedLetters = $("#picked-letters");
+/// FUNCTIONS 
 function checkForLetter(letter) {
     for (i = 0; i < randomWord.length; i++) {
         if (letter === randomWord[i]) {
@@ -29,45 +35,47 @@ function checkForLetter(letter) {
     return lettersLeft;
 }
 
+function addToGuessed() {
+    if (gameData.picked.includes(userGuess)) {
+        console.log("you already guessed that!");
+    } else {
+        gameData.picked.push(userGuess);
 
-document.onkeyup = function(event) {
-    userGuess = event.key.toLowerCase();
-    if (blankWord.indexOf(userGuess) !== -1) {
-        console.log("you picked that already");
-    } else if ((lettersLeft) > 0) {
-        console.log(userGuess);
 
-        checkForLetter(userGuess);
-        console.log(blankWord);
-        if (lettersLeft == 0) {
-            console.log("you win!")
-        }
+
     }
 }
 
+////BODY
+
+$(document).ready(function() {
+    $(gameBoard).text(blankWord.join(" "));
+
+    document.onkeyup = function(event) {
+
+        userGuess = event.key.toLowerCase();
+
+        if (blankWord.indexOf(userGuess) !== -1) {
+            console.log("you picked that already");
+            addToGuessed();
+            $(gameBoard).text(blankWord.join(" "));
+            $(pickedLetters).text(gameData.picked);
+            console.log(gameData.picked);
 
 
 
+        } else if ((lettersLeft) > 0) {
+            console.log(userGuess);
+            addToGuessed();
+            checkForLetter(userGuess);
 
-
-//     console.log(userGuess);
-
-
-
-//     if (gameData.pick.indexOf(userGuess) !== -1) {
-//         console.log("you already guessed that!");
-//         gameData.pick.push(userGuess);
-//         document.getElementById('lettersGuessed').innerHTML = gameData.pick;
-//     } else {
-//         if (randomWord.includes(userGuess)) {
-//             console.log("awesome");
-
-
-//         } else {
-//             console.log("not in the word guy")
-//             gameData.numberOfGuesses += 1;
-//             document.getElementById('guessesLeft').innerHTML = gameData.numberOfGuesses;
-
-//         }
-//     }
-// }
+            $(gameBoard).text(blankWord.join(" "));
+            $(pickedLetters).text(gameData.picked);
+            console.log(gameData.picked);
+            if (lettersLeft == 0) {
+                console.log("you win!")
+                $('body').append($('<div class="win">YOU WIN!</div>'))
+            }
+        }
+    }
+})

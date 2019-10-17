@@ -1,0 +1,8 @@
+.win {
+    background-color: yellow;
+    font-size: 10em;
+    position: fixed;
+    top: 20%;
+    left: 20%;
+    z-index: 99;
+}
