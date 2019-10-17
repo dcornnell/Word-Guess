@@ -32,7 +32,9 @@ function checkForLetter(letter) {
 
 document.onkeyup = function(event) {
     userGuess = event.key.toLowerCase();
-    if ((lettersLeft) > 0) {
+    if (blankWord.indexOf(userGuess) !== -1) {
+        console.log("you picked that already");
+    } else if ((lettersLeft) > 0) {
         console.log(userGuess);
 
         checkForLetter(userGuess);
