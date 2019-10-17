@@ -1,8 +1,26 @@
 .win {
-    background-color: yellow;
+    background-color: green;
     font-size: 10em;
     position: fixed;
     top: 20%;
     left: 20%;
     z-index: 99;
+}
+
+.loss {
+    background-color: red;
+    font-size: 10em;
+    position: fixed;
+    top: 20%;
+    left: 20%;
+    z-index: 99;
+}
+
+.message {
+    font-size: 2em;
+    color: red;
+    position: fixed;
+    top: 20%;
+    left: 20;
+    z-index: 50;
 }

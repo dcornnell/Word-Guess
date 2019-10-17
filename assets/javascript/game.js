@@ -5,11 +5,11 @@ let gameData = {
     words: ["ox", "llama", "bear"],
     picked: [],
     wins: 0,
-    numberOfGuesses: 0
+    numberOfGuesses: 5
 }
 let userGuess;
 const randomWord = gameData.words[Math.floor(Math.random() * gameData.words.length)];
-console.log(randomWord);
+
 let blankWord = [];
 let lettersLeft = randomWord.length;
 
@@ -23,6 +23,8 @@ for (i = 0; i < randomWord.length; i++) {
 //let guessesLeft = $("#guesses-left");
 let gameBoard = $("#game-board");
 let pickedLetters = $("#picked-letters");
+let guessesLeft = $("#guesses-left");
+
 /// FUNCTIONS 
 function checkForLetter(letter) {
     for (i = 0; i < randomWord.length; i++) {
@@ -38,6 +40,8 @@ function checkForLetter(letter) {
 function addToGuessed() {
     if (gameData.picked.includes(userGuess)) {
         console.log("you already guessed that!");
+        $('body').append($('<div id=message class="message">you picked that already</div>'))
+        $("#message").fadeOut(1000);
     } else {
         gameData.picked.push(userGuess);
 
@@ -51,31 +55,45 @@ function addToGuessed() {
 $(document).ready(function() {
     $(gameBoard).text(blankWord.join(" "));
 
+
+
     document.onkeyup = function(event) {
+        $("#message").remove();
+        $(guessesLeft).text(gameData.numberOfGuesses);
 
         userGuess = event.key.toLowerCase();
 
-        if (blankWord.indexOf(userGuess) !== -1) {
-            console.log("you picked that already");
-            addToGuessed();
-            $(gameBoard).text(blankWord.join(" "));
-            $(pickedLetters).text(gameData.picked);
-            console.log(gameData.picked);
+        if (gameData.numberOfGuesses === 0) {
+            $('body').append($('<div class="loss">YOU LOSE!</div>'))
+        } else {
+            //"already picked a letter in the word"
+            if (blankWord.indexOf(userGuess) !== -1) {
 
+                addToGuessed();
+                $(gameBoard).text(blankWord.join(" "));
+                $(pickedLetters).text(gameData.picked);
+                console.log(gameData.picked);
 
+                // correct pick
+            } else if ((lettersLeft) > 0) {
 
-        } else if ((lettersLeft) > 0) {
-            console.log(userGuess);
-            addToGuessed();
-            checkForLetter(userGuess);
+                console.log(userGuess);
+                addToGuessed();
+                checkForLetter(userGuess);
+                gameData.numberOfGuesses--;
+                $(gameBoard).text(blankWord.join(" "));
+                $(pickedLetters).text(gameData.picked);
+                console.log(gameData.picked);
+                //win
+                if (lettersLeft == 0) {
 
-            $(gameBoard).text(blankWord.join(" "));
-            $(pickedLetters).text(gameData.picked);
-            console.log(gameData.picked);
-            if (lettersLeft == 0) {
-                console.log("you win!")
-                $('body').append($('<div class="win">YOU WIN!</div>'))
+                    $('body').append($('<div class="win">YOU WIN!</div>'))
+                }
             }
+
         }
+
+
     }
-})
+
+});
