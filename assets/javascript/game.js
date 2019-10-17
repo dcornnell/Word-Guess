@@ -30,14 +30,15 @@ function checkForLetter(letter) {
 
 
 document.onkeyup = function(event) {
-    if (0 < lettersLeft) {
+
+    if ((lettersLeft) > 0) {
         console.log(event.key);
         userGuess = event.key;
-
         checkForLetter(userGuess);
         console.log(blankWord);
-    } else {
-        console.log("you win")
+        if (lettersLeft == 0) {
+            console.log("you win!")
+        }
     }
 }
 
