@@ -2,7 +2,7 @@ let gameData = {
     alphabet: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
         "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
     ],
-    words: ["ox", "dog", "bear"],
+    words: ["ox", "doog", "bear"],
     pick: [],
     wins: 0,
     numberOfGuesses: 0
@@ -23,17 +23,18 @@ function checkForLetter(letter) {
         if (letter === randomWord[i]) {
             blankWord[i] = letter;
             lettersLeft--;
-            return lettersLeft;
+
         }
     }
+    return lettersLeft;
 }
 
 
 document.onkeyup = function(event) {
-
+    userGuess = event.key.toLowerCase();
     if ((lettersLeft) > 0) {
-        console.log(event.key);
-        userGuess = event.key;
+        console.log(userGuess);
+
         checkForLetter(userGuess);
         console.log(blankWord);
         if (lettersLeft == 0) {
