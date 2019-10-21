@@ -8,21 +8,32 @@
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
+    <title>Word Guess</title>
 
     <title>Document</title>
 </head>
 
 <body>
-    <h1>press any key to get started!</h1>
-    <h1 id="game-board"></h1>
-    <h2>wins: <span id="wins"></span></h2>
+    <header>Word Guess Game</header>
 
-    <p>number of guesses: <span id="guesses-left"></span></p>
-    <p>letters already guessed <span id="picked-letters"></span></p>
+    <div class="container">
+        <h1 id="game-board"></h1>
 
-    <div id="game-board"></div>
+
+        <div class="box">
+            <div class="box-head">letters already guessed </div>
+            <div class="box-body"><span id="picked-letters"></span></div>
+        </div>
+        <div class="box">
+            <div class="box-head">number of guesses: </div>
+            <div class="box-body"><span id="guesses-left"></span></div>
+        </div>
+
+    </div>
+
+
     <script type="text/javascript" src="assets/javascript/game.js"></script>
+    </div>
 </body>
 
 </html>

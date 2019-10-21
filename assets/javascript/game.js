@@ -2,7 +2,7 @@ let gameData = {
     alphabet: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
         "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
     ],
-    words: ["ox", "llama", "bear"],
+    words: ["ox", "llama", "bear", "lynx", "camel", "zebra"],
     picked: [],
     wins: 0,
     numberOfGuesses: 5
@@ -39,7 +39,7 @@ function checkForLetter(letter) {
 
 function addToGuessed() {
     if (gameData.picked.includes(userGuess)) {
-        console.log("you already guessed that!");
+
         $('body').append($('<div id=message class="message">you picked that already</div>'))
         $("#message").fadeOut(1000);
     } else {
@@ -72,7 +72,7 @@ $(document).ready(function() {
                 addToGuessed();
                 $(gameBoard).text(blankWord.join(" "));
                 $(pickedLetters).text(gameData.picked);
-                console.log(gameData.picked);
+
 
                 // correct pick
             } else if ((lettersLeft) > 0) {
@@ -83,11 +83,12 @@ $(document).ready(function() {
                 gameData.numberOfGuesses--;
                 $(gameBoard).text(blankWord.join(" "));
                 $(pickedLetters).text(gameData.picked);
-                console.log(gameData.picked);
+
                 //win
                 if (lettersLeft == 0) {
 
                     $('body').append($('<div class="win">YOU WIN!</div>'))
+
                 }
             }
 
